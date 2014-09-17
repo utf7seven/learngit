@@ -160,3 +160,8 @@ git remote add 远程库名称 git@server-name:username/repo-name.git
  git支持多种协议，默认的git://使用ssh ，但是也可以使用https等其他协议
  https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令。
  如果可以选择的话，建议通过ssh连接，ssh支持原生的git协议速度最快
+ 
+ git log 发现内容特别长的话，可以使用按q返回
+
+ 
+ 记得补充远程仓库后面的笔记
