@@ -1,0 +1,142 @@
+cd d:/GitHub
+
+makedir learngit
+
+git init
+
+git add readme.txt
+
+[一次可以提交多个文件
+git add file1.txt
+ git add file2.txt
+ git add file3.txt 
+]
+
+git commit -m "add a readme file"
+
+
+初始化一个git仓库: cd git init 
+添加文件到Git仓库，分两步：
+	
+	.第一步，使用git add,注意可以反复多次使用，提交多个文件
+	.第二部，使用git commit,完成
+
+	
+git status
+
+D:\GitHub\learngit [master +0 ~1 -0]> git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working dir
+
+        modified:   readme.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+以上说readme.txt 被修改了，但是未提交
+
+
+git diff readme.txt
+
+可以查看文件差异
+
+git status 查看当前的状态
+
+git add readme.txt 
+
+git commit -m "add distributed" 
+
+git log 显示提交历史，从新到近
+
+git log --pretty=oneline
+一行显示
+
+
+版本回退
+
+git 使用HEAD表示当前版本，上一个版本就是HEAD^,上上一个版本就是HEAD^^,
+往上一百个版本写成HEAD~100
+
+当前版本恢复到上一个版本可以使用
+git reset 命令
+
+git reset --hard HEAD^
+
+git reset --hard 6f79
+git reset --hard commit_id
+恢复到某个版本，以6f79开头的版本
+
+
+记录每一次的命令
+
+D:\GitHub\learngit [master]> git reflog
+6f79d95 HEAD@{0}: reset: moving to 6f79
+74669d7 HEAD@{1}: reset: moving to HEAD^
+6f79d95 HEAD@{2}: commit: append GPL
+74669d7 HEAD@{3}: commit: add distributed
+b325fae HEAD@{4}: commit (initial): wrote a read file
+
+
+git log 可以查看提交历史，以便确定要恢复到那个版本
+git reflog可以查看命令历史，以便确定回到未来的版本
+
+
+
+理解暂存区和工作区
+
+git 管理的是文件的修改而不是文件
+
+第一次修改-> git add ->第二次修改->git commit 
+
+以上只会提交第一次修改
+
+不add 到暂存区就不会被加入到commit中
+
+撤销修改：
+git checkout -- readme.txt
+把readme在工作区的修改全部撤销。
+
+两种情况：
+一种是readme.txt自修改后还没有提交到暂存区，现在撤销修改就回到和 版本库一模一样的状态
+一种readme.txt 已经添加到暂存区后，又作了修改，现在撤销修改就回到了添加到暂存区后的状态。
+
+总之就是让这个文件回到最后一次git commit 或git add时的状态。
+
+git checkout -- file 命令中的 "--" 很重要，没有"--" ，就变成了"创建一个新分支"的命令。
+
+
+git reset HEAD readme.txt 
+可以把暂存区的修改撤销掉(unstage),重新放回工作区：
+git reset 命令既可以回退版本，也可以将暂存区的修改退到工作区。
+当我们使用HEAD时，表示最新版本
+
+
+
+删除
+
+rm test.txt删除本地文件
+git status
+git rm test.txt
+git commit -m "remove test.txt"
+
+
+本地删除错了，因为版本库又，所以可以还原
+git checkout -- test.txt
+
+
+
+远程仓库：
+
+git remote add orginlearngit git@github.com:utf7seven/learngit
+
+这就建立了一个远程库
+
+git push -u originlearngit master
+
+由于远程库是空的，第一次推送master分支时，加上了-u参数,Git 不但会把本地的
+mater分支推送到远程的新的master分支，并且还会将本地的master分支和远程的master分支关联起来。在以后的推送或者拉取时，就可以简化命令了
+
+git push originlearngit master
+
+将本地master分支的最新修改推送至github
