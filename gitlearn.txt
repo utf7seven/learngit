@@ -140,3 +140,23 @@ mater分支推送到远程的新的master分支，并且还会将本地的master
 git push originlearngit master
 
 将本地master分支的最新修改推送至github
+
+关联一个远程库，使用命令
+git remote add 远程库名称 git@server-name:username/repo-name.git
+
+关联后，使用命令git push -u 远程库名称 master 第一次推送master分支的所有内容
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push 远程库名称 master 推送最新修改
+
+
+以上是先有本地库，后有远程库
+
+下面是先有远程库，后有本地库
+
+从远程库克隆：
+ git clone git@github.com:utf7seven/utf7seven.github.io.git
+ 
+ 你也许注意到,GitHub给出的地址不止一个，还可以使用https://github.com/utf7seven/utf7seven.github.io
+ git支持多种协议，默认的git://使用ssh ，但是也可以使用https等其他协议
+ https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令。
+ 如果可以选择的话，建议通过ssh连接，ssh支持原生的git协议速度最快
